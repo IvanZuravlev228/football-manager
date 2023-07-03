@@ -49,5 +49,3 @@ public class PlayerController {
         playerService.removeById(id);
     }
 }
-
-

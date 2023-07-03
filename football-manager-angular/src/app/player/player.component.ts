@@ -31,14 +31,10 @@ export class PlayerComponent {
   getPlayerById(): void {
     this.isSend = true;
     this.http.get<PlayerResponse>("http://localhost:6867/players/" + this.id).subscribe({
-
-      // Успешное выполнение
       next: ((response: PlayerResponse) => {
         this.playerResponse = response;
         console.log(this.playerResponse);
       }),
-
-      // Выполнение с ошибкой
       error: (error => {
         console.log("Something went wrong ");
         console.log(error)
@@ -54,16 +50,12 @@ export class PlayerComponent {
         "Content-Type": "application/json"
       }
     }).subscribe({
-
-      // Успешное выполнение
       next: ((response: any) => {
         this.playerRequest = response;
         console.log(this.playerRequest);
         this.clearForm();
         this.messageToUser = "You successful add a new user!"
       }),
-
-      // Выполнение с ошибкой
       error: (error => {
         console.log(error);
         this.messageToUser = "Something went wrong. Try again"
@@ -84,19 +76,14 @@ export class PlayerComponent {
 
   deletePlayer(): void {
     this.http.delete<PlayerResponse>("http://localhost:6867/players/" + this.id).subscribe({
-
-      // Успешное выполнение
       next: ((response: PlayerResponse) => {
         this.playerResponse = response;
         console.log(this.playerResponse);
       }),
-
-      // Выполнение с ошибкой
       error: (error => {
         console.log("Something went wrong ");
         console.log(error)
       })
     })
   }
-
 }

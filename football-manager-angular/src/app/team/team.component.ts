@@ -23,14 +23,10 @@ export class TeamComponent {
 
   getAllTeams() {
     this.http.get<TeamResponse[]>("http://localhost:6867/teams").subscribe({
-
-      // Успешное выполнение
       next: ((response: TeamResponse[]) => {
         this.teams = response;
         console.log(this.teamResponse);
       }),
-
-      // Выполнение с ошибкой
       error: (error => {
         console.log("Something went wrong ");
         console.log(error)
@@ -40,14 +36,10 @@ export class TeamComponent {
 
   deleteTeam(id: bigint) {
     this.http.delete<any>("http://localhost:6867/teams/" + id).subscribe({
-
-      // Успешное выполнение
       next: ((response: any) => {
         console.log(response);
         this.getAllTeams();
       }),
-
-      // Выполнение с ошибкой
       error: (error => {
         console.log("Something went wrong ");
         console.log(error)
@@ -56,10 +48,7 @@ export class TeamComponent {
   }
 
   addTeam() {
-    // Преобразование playerIds из строки в массив чисел
-    // Устанавливаем playerIds в модель команды
     this.teamRequest.playersId = this.playerIds.split(', ').map(id => +id.trim());
-
     const body = JSON.stringify(this.teamRequest);
     console.log(body);
     this.http.post<any>("http://localhost:6867/teams", body, {
@@ -67,16 +56,12 @@ export class TeamComponent {
         "Content-Type": "application/json"
       }
     }).subscribe({
-
-      // Успешное выполнение
       next: ((response: any) => {
         console.log(response);
         this.teamRequest = new TeamRequest();
         this.playerIds = '';
         this.getAllTeams();
       }),
-
-      // Выполнение с ошибкой
       error: (error => {
         console.log("Something went wrong ");
         console.log(error)
@@ -87,15 +72,11 @@ export class TeamComponent {
   getAllPlayers(id: bigint) {
     this.showPlayers = true;
     this.http.get<PlayerResponse[]>("http://localhost:6867/teams/players/" + id).subscribe({
-
-      // Успешное выполнение
       next: ((response: PlayerResponse[]) => {
         this.players = response;
         console.log(response);
 
       }),
-
-      // Выполнение с ошибкой
       error: (error => {
         console.log("Something went wrong ");
         console.log(error)

@@ -1,0 +1,19 @@
+<h1 class="header-title">Make Transfer</h1>
+<div class="container">
+  <div class="split-container">
+    <div class="item">
+      <p class="item-text">From team: </p>
+      <input [(ngModel)]="fromTeamId"/>
+    </div>
+    <div class="item">
+      <p class="item-text">To team: </p>
+      <input type="number" [(ngModel)]="toTeamId"/>
+    </div>
+    <div class="item">
+      <p class="item-text">Player: </p>
+      <input type="number" [(ngModel)]="playerId"/>
+    </div>
+  </div>
+  <button class="transfer-button" (click)="makeTransfer()">Make Transfer</button>
+</div>
+

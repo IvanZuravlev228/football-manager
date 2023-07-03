@@ -1,0 +1,97 @@
+<button class="navigation-button" (click)="getAllTeams()">Show All Teams</button>
+
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Team Name</th>
+    <th>Money</th>
+    <th>Country</th>
+    <th>Nickname</th>
+    <th>Commission</th>
+    <th>Player IDs</th>
+    <th>Delete</th>
+    <th>Show All Players</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let team of teams">
+    <td>{{ team.id }}</td>
+    <td>{{ team.teamName }}</td>
+    <td>{{ team.money }}</td>
+    <td>{{ team.country }}</td>
+    <td>{{ team.nickname }}</td>
+    <td>{{ team.commission }}</td>
+    <td>{{ team.playersId }}</td>
+    <td><button (click)="deleteTeam(team.id)">Delete</button></td>
+    <td><button (click)="getAllPlayers(team.id)">Show Players</button></td>
+  </tr>
+  </tbody>
+</table>
+
+<button class="navigation-button" (click)="showAddNewTeamBlock()">Add New Team</button>
+<div *ngIf="showAddNewTeam">
+  <form class="form-container" (ngSubmit)="addTeam()">
+    <div class="form-group">
+      <label class="form-label" for="teamName">Team Name:</label>
+      <input class="form-input" type="text" id="teamName" [(ngModel)]="teamRequest.teamName" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="money">Money:</label>
+      <input class="form-input" type="number" id="money" [(ngModel)]="teamRequest.money" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="country">Country:</label>
+      <input class="form-input" type="text" id="country" [(ngModel)]="teamRequest.country" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="nickname">Nickname:</label>
+      <input class="form-input" type="text" id="nickname" [(ngModel)]="teamRequest.nickname" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="commission">Commission:</label>
+      <input class="form-input" type="number" id="commission" [(ngModel)]="teamRequest.commission" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="players_id">Player IDs (1, 2):</label>
+      <input class="form-input" type="text" id="players_id" [(ngModel)]="playerIds" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+      <button class="form-button" type="submit">Add Team</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="showPlayers">
+  <table class="person-table">
+    <thead>
+    <tr>
+      <th class="table-header">ID</th>
+      <th class="table-header">First Name</th>
+      <th class="table-header">Last Name</th>
+      <th class="table-header">Age</th>
+      <th class="table-header">Experience</th>
+      <th class="table-header">Date of Birth</th>
+      <th class="table-header">Country of Birth</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let player of players">
+      <td class="table-data">{{ player.id }}</td>
+      <td class="table-data">{{ player.firstName }}</td>
+      <td class="table-data">{{ player.lastName }}</td>
+      <td class="table-data">{{ player.age }}</td>
+      <td class="table-data">{{ player.experience }}</td>
+      <td class="table-data">{{ player.dateOfBirth | date }}</td>
+      <td class="table-data">{{ player.countryOfBirth }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

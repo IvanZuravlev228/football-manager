@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="split-container">
+    <button (click)="showGetByIdBlock()" class="menu-button">
+      <h1 class="header-title">Get Player By Id</h1>
+    </button>
+    <div *ngIf="showGetById">
+      <input [(ngModel)]="id" class="inputIdPlayer">
+      <button (click)="getPlayerById()" class="submit-button">Get!</button>
+
+
+      <table class="person-table" *ngIf="isSend">
+        <thead>
+        <tr>
+          <th class="table-header">ID</th>
+          <th class="table-header">First Name</th>
+          <th class="table-header">Last Name</th>
+          <th class="table-header">Age</th>
+          <th class="table-header">Experience</th>
+          <th class="table-header">Date of Birth</th>
+          <th class="table-header">Country of Birth</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="table-data">{{ playerResponse.id }}</td>
+          <td class="table-data">{{ playerResponse.firstName }}</td>
+          <td class="table-data">{{ playerResponse.lastName }}</td>
+          <td class="table-data">{{ playerResponse.age }}</td>
+          <td class="table-data">{{ playerResponse.experience }}</td>
+          <td class="table-data">{{ playerResponse.dateOfBirth | date }}</td>
+          <td class="table-data">{{ playerResponse.countryOfBirth }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="split-container">
+    <button (click)="showAddNewPlayerBlock()" class="menu-button">
+      <h1 class="header-title">Add New Player</h1>
+    </button>
+    <div *ngIf="showAddNewPlayer">
+      <form (ngSubmit)="addNewPlayer()" class="my-form">
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" [(ngModel)]="playerRequest.firstName" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" [(ngModel)]="playerRequest.lastName" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input type="number" id="age" [(ngModel)]="playerRequest.age" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Experience:</label>
+          <input type="number" id="experience" [(ngModel)]="playerRequest.experience" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="form-group">
+          <label for="dateOfBirth">Date of Birth:</label>
+          <input type="date" id="dateOfBirth" [(ngModel)]="playerRequest.dateOfBirth" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="form-group">
+          <label for="countryOfBirth">Country of Birth:</label>
+          <input type="text" id="countryOfBirth" [(ngModel)]="playerRequest.countryOfBirth" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <p class="error-success-msg">{{messageToUser}}</p>
+
+        <button type="submit" class="submit-button">Add Player</button>
+      </form>
+    </div>
+  </div>
+
+</div>

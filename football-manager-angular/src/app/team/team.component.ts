@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {TeamRequest} from "../model/TeamRequest";
 import {TeamResponse} from "../model/TeamResponse";
 import {PlayerResponse} from "../model/PlayerResponse";
+import {environment} from "../../environment/environment";
 
 @Component({
   selector: 'app-team',
@@ -22,7 +23,7 @@ export class TeamComponent {
   }
 
   getAllTeams() {
-    this.http.get<TeamResponse[]>("http://localhost:6867/teams").subscribe({
+    this.http.get<TeamResponse[]>(environment.backendURL + "/teams").subscribe({
       next: ((response: TeamResponse[]) => {
         this.teams = response;
         console.log(this.teamResponse);
@@ -35,7 +36,7 @@ export class TeamComponent {
   }
 
   deleteTeam(id: bigint) {
-    this.http.delete<any>("http://localhost:6867/teams/" + id).subscribe({
+    this.http.delete<any>(environment.backendURL + "/teams/" + id).subscribe({
       next: ((response: any) => {
         console.log(response);
         this.getAllTeams();
@@ -51,7 +52,7 @@ export class TeamComponent {
     this.teamRequest.playersId = this.playerIds.split(', ').map(id => +id.trim());
     const body = JSON.stringify(this.teamRequest);
     console.log(body);
-    this.http.post<any>("http://localhost:6867/teams", body, {
+    this.http.post<any>(environment.backendURL + "/teams", body, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -71,7 +72,7 @@ export class TeamComponent {
 
   getAllPlayers(id: bigint) {
     this.showPlayers = true;
-    this.http.get<PlayerResponse[]>("http://localhost:6867/teams/players/" + id).subscribe({
+    this.http.get<PlayerResponse[]>(environment.backendURL + "/teams/players/" + id).subscribe({
       next: ((response: PlayerResponse[]) => {
         this.players = response;
         console.log(response);

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environment/environment";
 
 @Component({
   selector: 'app-transfer',
@@ -15,7 +16,7 @@ export class TransferComponent {
   }
 
   makeTransfer() {
-    this.http.get<any>("http://localhost:6867/transfer?fromTeamId=" + this.fromTeamId
+    this.http.get<any>(environment.backendURL + "/transfer?fromTeamId=" + this.fromTeamId
                                       + "&toTeamId=" + this.toTeamId
                                       + "&playerId=" + this.playerId).subscribe({
       next: ((response: any) => {

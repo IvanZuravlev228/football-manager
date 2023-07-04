@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {PlayerRequest} from "../model/PlayerRequest";
 import {HttpClient} from "@angular/common/http";
 import {PlayerResponse} from "../model/PlayerResponse";
+import {environment} from "../../environment/environment";
 
 @Component({
   selector: 'app-player',
@@ -30,7 +31,7 @@ export class PlayerComponent {
 
   getPlayerById(): void {
     this.isSend = true;
-    this.http.get<PlayerResponse>("http://localhost:6867/players/" + this.id).subscribe({
+    this.http.get<PlayerResponse>(environment.backendURL + "/players/" + this.id).subscribe({
       next: ((response: PlayerResponse) => {
         this.playerResponse = response;
         console.log(this.playerResponse);
@@ -45,7 +46,7 @@ export class PlayerComponent {
   addNewPlayer(): void {
     const body = JSON.stringify(this.playerRequest);
     console.log(body);
-    this.http.post<PlayerRequest>("http://localhost:6867/players", body, {
+    this.http.post<PlayerRequest>(environment.backendURL + "/players", body, {
       headers: {
         "Content-Type": "application/json"
       }
@@ -75,7 +76,7 @@ export class PlayerComponent {
   }
 
   deletePlayer(): void {
-    this.http.delete<PlayerResponse>("http://localhost:6867/players/" + this.id).subscribe({
+    this.http.delete<PlayerResponse>(environment.backendURL + "/players/" + this.id).subscribe({
       next: ((response: PlayerResponse) => {
         this.playerResponse = response;
         console.log(this.playerResponse);
